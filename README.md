@@ -1,7 +1,8 @@
 # trouble-shooting
+
 用来做测试和debug使用  
-默认端口 8888  
-启动命令./trouble-shooting server  
+- 默认端口 8888  
+- 启动命令./trouble-shooting server  
 
 #包含一下工具
 ```
