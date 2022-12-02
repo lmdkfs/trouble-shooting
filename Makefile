@@ -1,6 +1,6 @@
 PROJECT="trouble-shooting"
 BINARY="trouble-shooting"
-VERSION=0.1
+VERSION=0.2
 default:
 	go build -o ./bin/${BINARY} main.go
 linux:
@@ -10,6 +10,9 @@ test:
 	go tool cover -html=cover.out -o test.html
 
 docker:
-	 docker build -t ${PROJECT}:${VERSION} .
+	docker build -t ${PROJECT}:${VERSION} .
+
+podman: 
+	podman build -t ${PROJECT}:${VERSION} .
 clean:
 	cd bin && if [ -f ${BINARY} ] ; then rm  ${BINARY} ; fi

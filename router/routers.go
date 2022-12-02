@@ -1,13 +1,14 @@
 package router
 
 import (
+	"time"
 	"trouble-shooting/config"
 	"trouble-shooting/controllers"
 	"trouble-shooting/utils"
-	 "github.com/bamzi/jobrunner"
+
+	"github.com/bamzi/jobrunner"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"time"
 )
 
 func InitRouter() *gin.Engine {
@@ -24,6 +25,7 @@ func InitRouter() *gin.Engine {
 	route.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	route.GET("/healthz", controllers.Healthz)
 	route.POST("/healthz/:code", controllers.ChangeTestHTTPStatus)
+	route.GET("/headers", controllers.PrintAllHeaders)
 	authorized := route.Group("/", gin.BasicAuth(gin.Accounts{
 		"foo":  "bar", // user: foo password:bar
 		"manu": "123", // user:manu password: 123
@@ -39,6 +41,6 @@ func InitRouter() *gin.Engine {
 
 	}
 
-	 jobrunner.Start()
+	jobrunner.Start()
 	return route
 }
