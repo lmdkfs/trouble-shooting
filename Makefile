@@ -1,18 +1,35 @@
 PROJECT="trouble-shooting"
 BINARY="trouble-shooting"
-VERSION=0.2
+REGISTRY="ccr.ccs.tencentyun.com"
+ifdef ${tsregistry}
+	echo "registry addr: ${tsregistry}"
+	REGISTRY=${tsregistry}
+else
+	REGISTRY="ccr.ccs.tencentyun.com"
+endif
+
+ifdef ${tsversion}
+	echo "ts version: ${tsversion}"
+        VERSION=0.2
+else 
+	VERSION=$(tsversion)
+endif
+
 default:
 	go build -o ./bin/${BINARY} main.go
 linux:
+	echo "ts version: ${VERSION}"
 	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./bin/${BINARY} main.go
 test:
 	go test -v -coverprofile=cover.out ./router/
 	go tool cover -html=cover.out -o test.html
 
 docker:
-	docker build -t ${PROJECT}:${VERSION} .
+	echo "ts version: ${VERSION}"
+	docker build -t ${REGISTRY}/${PROJECT}/:${VERSION} .
 
 podman: 
-	podman build -t ${PROJECT}:${VERSION} .
+	echo "ts version: ${VERSION}"
+	podman build -t ${REGISTRY}/${PROJECT}/ts:${VERSION} .
 clean:
 	cd bin && if [ -f ${BINARY} ] ; then rm  ${BINARY} ; fi
