@@ -3,9 +3,9 @@ BINARY="trouble-shooting"
 REGISTRY="ccr.ccs.tencentyun.com"
 ifdef ${tsregistry}
 	echo "registry addr: ${tsregistry}"
-	REGISTRY=${tsregistry}
-else
 	REGISTRY="ccr.ccs.tencentyun.com"
+else
+	REGISTRY=${tsregistry}
 endif
 
 ifdef ${tsversion}
