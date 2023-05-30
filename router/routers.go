@@ -41,6 +41,9 @@ func InitRouter() *gin.Engine {
 
 	}
 
+	// register websocket router
+	route.GET("/ws", controllers.WebSocketHandler)
+
 	jobrunner.Start()
 	return route
 }
