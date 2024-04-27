@@ -1,6 +1,6 @@
-PROJECT="trouble-shooting"
-BINARY="trouble-shooting"
-REGISTRY="ccr.ccs.tencentyun.com"
+PROJECT=trouble-shooting
+BINARY=trouble-shooting
+REGISTRY=ccr.ccs.tencentyun.com
 OUTPUT:=bin
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
