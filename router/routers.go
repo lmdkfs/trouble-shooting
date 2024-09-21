@@ -25,6 +25,7 @@ func InitRouter() *gin.Engine {
 	route.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	route.GET("/healthz", controllers.Healthz)
 	route.POST("/healthz/:code", controllers.ChangeTestHTTPStatus)
+	route.POST("/webhook", controllers.Webhook)
 	route.GET("/headers", controllers.PrintAllHeaders)
 	authorized := route.Group("/", gin.BasicAuth(gin.Accounts{
 		"foo":  "bar", // user: foo password:bar
